@@ -1,0 +1,5 @@
+# TEMP: النطاق مؤقت (demo-kitchen.example) — استبدله بالنطاق الفعلي قبل النشر
+User-agent: *
+Allow: /
+
+Sitemap: https://demo-kitchen.example/sitemap.xml

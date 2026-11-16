@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="">
+<meta name="description" content="">
+<meta name="theme-color" content="">
+<link rel="canonical" id="canonical" href="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" id="ogSiteName" content="">
+<meta property="og:title" id="ogTitle" content="">
+<meta property="og:description" id="ogDescription" content="">
+<meta property="og:url" id="ogUrl" content="">
+<meta property="og:locale" content="ar_SA">
+<title></title>
+<link rel="icon" id="favicon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<a class="skip" href="#main" data-t="ui.skip"></a>
+
+<!-- 1) الهيدر -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header__in">
+    <a class="brand" href="#home" data-a="aria-label:brand.name">
+      <span class="brand__mark" data-logo aria-hidden="true"></span>
+      <span class="brand__text">
+        <strong data-t="brand.name"></strong>
+        <small data-t="brand.tagline"></small>
+      </span>
+    </a>
+
+    <div class="header__actions">
+      <a class="btn btn--ghost btn--sm header__call" data-link="tel" data-a="aria-label:ui.callAria">
+        <svg data-icon="phone"></svg>
+        <span data-t="ui.callShort"></span>
+      </a>
+      <a class="btn btn--solid btn--sm" href="#contact" data-t="ui.orderNow"></a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" data-a="aria-label:ui.menuOpen">
+        <span class="burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+
+    <nav class="nav" id="nav" data-a="aria-label:ui.navLabel">
+      <ul class="nav__list">
+        <li><a href="#home" data-t="ui.nav.home"></a></li>
+        <li><a href="#services" data-t="ui.nav.services"></a></li>
+        <li><a href="#works" data-t="ui.nav.works"></a></li>
+        <li><a href="#areas" data-t="ui.nav.areas"></a></li>
+        <li><a href="#contact" data-t="ui.nav.contact"></a></li>
+      </ul>
+      <div class="nav__foot">
+        <a class="btn btn--solid btn--block" href="#contact" data-t="ui.orderNow"></a>
+        <a class="nav__phone" data-link="tel"><bdi dir="ltr" data-t="contact.phoneDisplay"></bdi></a>
+      </div>
+    </nav>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<main id="main">
+
+  <!-- 2) الواجهة -->
+  <section class="section hero" id="home" aria-labelledby="heroTitle">
+    <div class="wrap hero__in">
+      <div class="hero__text">
+        <p class="status" id="statusBadge" hidden>
+          <span class="status__dot" aria-hidden="true"></span>
+          <span id="statusText"></span>
+        </p>
+        <h1 id="heroTitle" data-t="hero.title"></h1>
+        <p class="hero__lead" data-t="hero.lead"></p>
+        <div class="hero__actions">
+          <a class="btn btn--solid btn--lg" href="#contact" data-t="hero.cta"></a>
+        </div>
+        <ul class="hero__facts" id="factsList"></ul>
+      </div>
+
+      <div class="hero__art" aria-hidden="true">
+        <svg viewBox="0 0 420 340" focusable="false">
+          <g fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="46" y="42" width="150" height="86" rx="6" opacity=".8"/>
+            <rect x="212" y="42" width="162" height="86" rx="6" opacity=".8"/>
+            <path d="M121 42v86M293 42v86" opacity=".8"/>
+            <path d="M112 80v14M302 80v14" opacity=".8"/>
+            <path d="M28 168h364" stroke-width="2.8"/>
+            <rect x="40" y="172" width="340" height="98" rx="6" opacity=".9"/>
+            <path d="M152 172v98M264 172v98" opacity=".9"/>
+            <path d="M40 212h112M264 212h116" opacity=".9"/>
+            <circle cx="116" cy="192" r="2.4"/><circle cx="240" cy="192" r="2.4"/>
+            <circle cx="132" cy="246" r="2.4"/><circle cx="288" cy="246" r="2.4"/>
+            <rect x="68" y="154" width="92" height="14" rx="4"/>
+            <path d="M114 154v-24h-16"/>
+            <path d="M46 296h328" opacity=".35"/>
+            <path d="M104 296v14M316 296v14" opacity=".35"/>
+          </g>
+        </svg>
+        <div class="hero__art-foot">
+          <span data-t="hero.artA"></span>
+          <span data-t="hero.artB"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3) الخدمات -->
+  <section class="section section--tint" id="services" aria-labelledby="servicesTitle">
+    <div class="wrap">
+      <h2 id="servicesTitle" data-t="services.title"></h2>
+      <p class="lead" data-t="services.lead"></p>
+      <div class="cards" id="servicesGrid"></div>
+      <ul class="features" id="featuresList"></ul>
+    </div>
+  </section>
+
+  <!-- 4) أعمالنا -->
+  <section class="section" id="works" aria-labelledby="worksTitle">
+    <div class="wrap">
+      <h2 id="worksTitle" data-t="works.title"></h2>
+      <p class="lead" data-t="works.lead"></p>
+      <div class="works" id="worksGrid" tabindex="0" data-a="aria-label:works.title"></div>
+      <p class="works__hint" data-t="works.hint"></p>
+    </div>
+  </section>
+
+  <!-- 5) مناطق الخدمة -->
+  <section class="section section--tint" id="areas" aria-labelledby="areasTitle">
+    <div class="wrap">
+      <h2 id="areasTitle" data-t="areas.title"></h2>
+      <p class="lead" data-t="areas.lead"></p>
+      <ul class="areas" id="areasList"></ul>
+      <p class="areas__note" data-t="areas.note"></p>
+    </div>
+  </section>
+
+  <!-- 6) التواصل -->
+  <section class="section" id="contact" aria-labelledby="contactTitle">
+    <div class="wrap">
+      <h2 id="contactTitle" data-t="contactSec.title"></h2>
+      <p class="lead" data-t="contactSec.lead"></p>
+
+      <div class="composer">
+        <div class="composer__step">
+          <p class="composer__label"><span class="composer__num" aria-hidden="true">1</span><span data-t="order.step1"></span></p>
+          <div class="chips" id="serviceChips" role="group" data-a="aria-label:order.step1"></div>
+        </div>
+
+        <div class="composer__step">
+          <p class="composer__label"><span class="composer__num" aria-hidden="true">2</span><span data-t="order.step2"></span></p>
+          <div class="chips" id="districtChips" role="group" data-a="aria-label:order.step2"></div>
+        </div>
+
+        <div class="composer__step">
+          <p class="composer__label"><span class="composer__num" aria-hidden="true">3</span><span data-t="order.step3"></span></p>
+          <div class="chips" id="timeChips" role="group" data-a="aria-label:order.step3"></div>
+        </div>
+
+        <details class="note">
+          <summary data-t="order.noteLabel"></summary>
+          <textarea id="noteInput" rows="2" data-a="placeholder:order.notePlaceholder;aria-label:order.noteLabel"></textarea>
+        </details>
+
+        <p class="composer__summary" id="orderSummary" aria-live="polite"></p>
+
+        <div class="composer__actions">
+          <button class="btn btn--solid btn--lg" id="sendBtn" type="button" disabled data-t="order.send"></button>
+          <a class="btn btn--ghost btn--lg" data-link="tel" data-a="aria-label:ui.callAria">
+            <svg data-icon="phone"></svg>
+            <span data-t="ui.callNow"></span>
+          </a>
+        </div>
+        <p class="composer__hint" data-t="order.hint"></p>
+      </div>
+
+      <div class="contact-info">
+        <div class="map">
+          <iframe id="mapFrame" loading="lazy" height="300" allowfullscreen
+                  referrerpolicy="no-referrer-when-downgrade"
+                  data-a="src:contact.mapEmbed;title:contactSec.mapTitle"></iframe>
+          <div class="map__foot">
+            <a class="btn btn--ghost" data-link="map" data-t="contactSec.directions"></a>
+          </div>
+        </div>
+
+        <div class="info">
+          <p class="info__label" data-t="contactSec.hoursLabel"></p>
+          <ul class="hours" id="hoursList"></ul>
+          <p class="info__label" data-t="contactSec.reviewsLabel"></p>
+          <a class="link" data-link="reviews" data-t="contactSec.reviewsCta"></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 7) الفوتر -->
+<footer class="site-footer">
+  <div class="wrap footer__in">
+    <p class="footer__name" data-t="brand.name"></p>
+    <p class="footer__meta" data-t="brand.tagline"></p>
+    <p class="footer__credit" data-t="footer.designedBy"></p>
+    <p class="footer__demo" data-t="footer.demo"></p>
+  </div>
+</footer>
+
+<!-- 8) شريط الجوال الثابت -->
+<div class="mobilebar" id="mobileBar">
+  <p class="mobilebar__status" id="barStatus">
+    <span class="status__dot" aria-hidden="true"></span>
+    <span id="barStatusText"></span>
+  </p>
+  <a class="btn btn--solid mobilebar__order" href="#contact" data-t="ui.orderShort"></a>
+  <a class="mobilebar__call" data-link="tel" data-a="aria-label:ui.callAria">
+    <svg data-icon="phone"></svg>
+  </a>
+</div>
+
+<!-- نافذة عرض العمل -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" data-a="aria-label:works.title" hidden>
+  <div class="lb__bar">
+    <span class="lb__count" id="lbCount"></span>
+    <button class="lb__close" id="lbClose" type="button" data-a="aria-label:works.close">✕</button>
+  </div>
+  <div class="lb__stage" id="lbStage"></div>
+  <div class="lb__nav">
+    <button class="lb__arrow" id="lbNext" type="button" data-a="aria-label:works.next">‹</button>
+    <button class="lb__arrow" id="lbPrev" type="button" data-a="aria-label:works.prev">›</button>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

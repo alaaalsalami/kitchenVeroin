@@ -1,0 +1,2279 @@
+<!DOCTYPE html>
+<!-- نسخة ملف واحد: كل الأنماط والسكربت مضمّنة. تعمل بفتح الملف مباشرة. -->
+
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="">
+<meta name="description" content="">
+<meta name="theme-color" content="">
+<link rel="canonical" id="canonical" href="">
+<meta property="og:type" content="website">
+<meta property="og:site_name" id="ogSiteName" content="">
+<meta property="og:title" id="ogTitle" content="">
+<meta property="og:description" id="ogDescription" content="">
+<meta property="og:url" id="ogUrl" content="">
+<meta property="og:locale" content="ar_SA">
+<title></title>
+<link rel="icon" id="favicon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   فني مطابخ صيانة وتفصيل — الأنماط
+   لون واحد فقط: #0f766e — خط واحد فقط: Cairo (400 / 700)
+   لا تدرجات، لا زجاج، لا ظلال ثقيلة، حركة 200ms فقط.
+   ========================================================= */
+
+/* ---------- 1. المتغيرات ---------- */
+:root {
+  --accent: #0f766e;
+  --on-accent: #ffffff;
+  --accent-text: var(--accent);
+
+  --bg: #ffffff;
+  --bg-tint: #f5f8f7;
+  --surface: #ffffff;
+  --surface-2: #f3f7f6;
+  --line: #dfe7e5;
+  --text: #0b1a18;
+  --text-2: #3d5451;
+  --muted: #5b6f6c;
+
+  --radius-sm: 10px;
+  --radius: 14px;
+  --radius-lg: 18px;
+
+  --wrap: 1120px;
+  --header-h: 68px;
+  --section-y: 72px;
+
+  --t: 200ms;
+  --ease: cubic-bezier(.2, .7, .3, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* نفس اللون تماماً — يُستخدم للتعبئة فقط، والنص على التعبئة أبيض */
+    --accent: #0f766e;
+    --on-accent: #ffffff;
+    --accent-text: #eaf3f1;
+
+    --bg: #0a1211;
+    --bg-tint: #0e1917;
+    --surface: #101c1a;
+    --surface-2: #13211f;
+    --line: #21332f;
+    --text: #eaf3f1;
+    --text-2: #b9cac7;
+    --muted: #93a7a3;
+  }
+}
+
+/* ---------- 2. إعادة الضبط ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-block-start: calc(var(--header-h) + 16px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+img, svg, iframe { max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+[hidden] { display: none !important; }
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* ---------- 3. أدوات عامة ---------- */
+.wrap {
+  width: 100%;
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+.skip {
+  position: absolute;
+  inset-inline-start: 12px;
+  inset-block-start: -100px;
+  z-index: 300;
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+  transition: inset-block-start var(--t) var(--ease);
+}
+
+.skip:focus-visible { inset-block-start: 12px; }
+
+.section {
+  padding-block: var(--section-y);
+  scroll-margin-block-start: var(--header-h);
+}
+
+.section--tint { background: var(--bg-tint); }
+
+.section h2 {
+  font-size: clamp(22px, 1.6vw + 14px, 30px);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -.2px;
+  margin-block-end: 10px;
+}
+
+.section h1 {
+  font-size: clamp(26px, 3.4vw + 12px, 44px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.5px;
+  margin-block-end: 14px;
+}
+
+.lead {
+  color: var(--text-2);
+  font-size: 15.5px;
+  max-width: 62ch;
+  margin-block-end: 28px;
+}
+
+.link {
+  color: var(--accent-text);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.link:hover { text-decoration-thickness: 2px; }
+
+/* ---------- 4. الأزرار ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding-inline: 18px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--t) var(--ease),
+              border-color var(--t) var(--ease),
+              color var(--t) var(--ease),
+              filter var(--t) var(--ease);
+}
+
+.btn svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+.btn--solid {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn--solid:hover { filter: brightness(.93); }
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--text);
+}
+
+.btn--ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.btn--sm {
+  min-height: 44px;
+  padding-inline: 14px;
+  font-size: 14px;
+}
+
+.btn--lg {
+  min-height: 52px;
+  padding-inline: 24px;
+  font-size: 16px;
+}
+
+.btn--block { width: 100%; }
+
+.btn:disabled,
+.btn[disabled] {
+  opacity: .45;
+  cursor: not-allowed;
+  filter: none;
+}
+
+/* ---------- 5. الهيدر ---------- */
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 140;
+  background: var(--surface);
+  border-block-end: 1px solid var(--line);
+}
+
+.site-header.is-stuck { border-block-end-color: var(--accent); }
+
+.header__in {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: var(--header-h);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  min-height: 48px;
+}
+
+.brand__mark {
+  display: block;
+  width: 38px;
+  height: 38px;
+  flex: none;
+}
+
+.brand__mark svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.brand__text strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.brand__text small {
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  order: 3;
+  margin-inline-start: auto;
+}
+
+.header__call { flex: none; }
+
+.burger {
+  display: none;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.burger__box {
+  display: grid;
+  gap: 4px;
+  width: 20px;
+}
+
+.burger__box i {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
+  transition: transform var(--t) var(--ease), opacity var(--t) var(--ease);
+}
+
+html.nav-open .burger__box i:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+html.nav-open .burger__box i:nth-child(2) { opacity: 0; }
+html.nav-open .burger__box i:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+html.nav-open .burger {
+  position: relative;
+  z-index: 150;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+html.nav-open .burger__box i { background: var(--on-accent); }
+
+/* القائمة — سطح المكتب */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  order: 2;
+}
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav__list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--text-2);
+  transition: color var(--t) var(--ease), background-color var(--t) var(--ease);
+}
+
+.nav__list a:hover {
+  color: var(--accent-text);
+  background: var(--surface-2);
+}
+
+.nav__foot { display: none; }
+
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(6, 20, 18, .55);
+}
+
+/* ---------- 6. الواجهة ---------- */
+.hero__in {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding: 4px 14px;
+  margin-block-end: 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.status__dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.status.is-open {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.status.is-open .status__dot { background: var(--accent); }
+
+.hero__lead {
+  color: var(--text-2);
+  font-size: 16px;
+  max-width: 56ch;
+  margin-block-end: 24px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-block-end: 28px;
+}
+
+.hero__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.hero__facts li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+
+.hero__facts svg {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  color: var(--accent);
+}
+
+.hero__art {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  padding: 18px;
+}
+
+.hero__art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero__art-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-block-start: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+/* ---------- 7. الخدمات ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color var(--t) var(--ease);
+}
+
+.card:hover { border-color: var(--accent); }
+
+.card__ico {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-block-end: 2px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--accent);
+}
+
+.card__ico svg {
+  width: 23px;
+  height: 23px;
+}
+
+.card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.card p {
+  color: var(--text-2);
+  font-size: 14.5px;
+  flex: 1;
+}
+
+.card__order {
+  align-self: flex-start;
+  min-height: 48px;
+  margin-block-start: 6px;
+  padding-inline: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--accent-text);
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color var(--t) var(--ease),
+              border-color var(--t) var(--ease),
+              color var(--t) var(--ease);
+}
+
+.card__order:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px 24px;
+  margin-block-start: 28px;
+  padding-block-start: 24px;
+  border-block-start: 1px solid var(--line);
+}
+
+.features li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14.5px;
+  color: var(--text-2);
+}
+
+.feature__ico {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--accent);
+}
+
+/* ---------- 8. أعمالنا (تمرير أفقي) ---------- */
+.works {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 20px;
+  padding-block: 4px 12px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  cursor: grab;
+}
+
+.works.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.works::-webkit-scrollbar { height: 8px; }
+.works::-webkit-scrollbar-track { background: var(--surface-2); border-radius: 8px; }
+.works::-webkit-scrollbar-thumb { background: var(--line); border-radius: 8px; }
+.works::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+.work {
+  flex: 0 0 auto;
+  width: clamp(238px, 30vw, 336px);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+  scroll-snap-align: start;
+  cursor: pointer;
+  transition: border-color var(--t) var(--ease);
+}
+
+.work:hover,
+.work:focus-visible { border-color: var(--accent); }
+
+.work svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.works__hint {
+  margin-block-start: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- 9. مناطق الخدمة ---------- */
+.areas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.areas li {
+  flex: 1 1 132px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 14.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.areas__note {
+  margin-block-start: 16px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+/* ---------- 10. التواصل + نموذج الطلب ---------- */
+.composer {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.composer__step + .composer__step { margin-block-start: 22px; }
+
+.composer__label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-block-end: 10px;
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.composer__num {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  min-height: 48px;
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--t) var(--ease),
+              border-color var(--t) var(--ease),
+              color var(--t) var(--ease);
+}
+
+.chip:hover { border-color: var(--accent); }
+
+.chip[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  font-weight: 700;
+}
+
+.note {
+  margin-block-start: 22px;
+  border-block-start: 1px solid var(--line);
+  padding-block-start: 14px;
+}
+
+.note summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+  cursor: pointer;
+  list-style: none;
+}
+
+.note summary::-webkit-details-marker { display: none; }
+
+.note summary::after {
+  content: "+";
+  margin-inline-start: auto;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.note[open] summary::after { content: "–"; }
+.note summary:hover { color: var(--accent-text); }
+
+.note textarea {
+  width: 100%;
+  min-height: 76px;
+  margin-block-start: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 14.5px;
+  line-height: 1.7;
+  resize: vertical;
+}
+
+.note textarea:focus-visible { border-color: var(--accent); }
+
+.composer__summary {
+  margin-block-start: 18px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.composer__summary.is-ready {
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.composer__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-block-start: 16px;
+}
+
+.composer__hint {
+  margin-block-start: 12px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.contact-info {
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;
+  gap: 20px;
+  margin-block-start: 28px;
+  align-items: start;
+}
+
+.map {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.map iframe {
+  display: block;
+  width: 100%;
+  height: 300px;
+  border: 0;
+}
+
+.map__foot {
+  padding: 12px 14px;
+  border-block-start: 1px solid var(--line);
+}
+
+.info {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.info__label {
+  margin-block: 0 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .3px;
+  color: var(--muted);
+}
+
+.info__label ~ .info__label { margin-block-start: 20px; }
+
+.hours { margin-block-end: 4px; }
+
+.hours li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-block: 7px;
+  border-block-end: 1px solid var(--line);
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.hours li:last-child { border-block-end: 0; }
+
+.hours b { font-weight: 700; color: var(--text); }
+
+.hours .is-today {
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+.hours .is-today b { color: var(--accent-text); }
+
+.hours .is-off,
+.hours .is-off b { color: var(--muted); }
+
+/* ---------- 11. الفوتر ---------- */
+.site-footer {
+  padding-block: 34px;
+  border-block-start: 1px solid var(--line);
+  background: var(--bg-tint);
+}
+
+.footer__in {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.footer__name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.footer__meta {
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+
+.footer__credit {
+  margin-block-start: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.footer__demo {
+  font-size: 11.5px;
+  letter-spacing: .4px;
+  color: var(--muted);
+}
+
+/* ---------- 12. شريط الجوال ---------- */
+.mobilebar {
+  display: none;
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 100;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-block-start: 1px solid var(--line);
+}
+
+.mobilebar__status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--muted);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mobilebar__status .status__dot { flex: none; }
+
+.mobilebar__status.is-open {
+  color: var(--accent-text);
+}
+
+.mobilebar__status.is-open .status__dot { background: var(--accent); }
+
+.mobilebar__order {
+  min-height: 48px;
+  padding-inline: 16px;
+  font-size: 14px;
+}
+
+.mobilebar__call {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+}
+
+.mobilebar__call svg {
+  width: 21px;
+  height: 21px;
+}
+
+/* ---------- 13. نافذة عرض العمل ---------- */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(6, 20, 18, .9);
+}
+
+.lb__bar,
+.lb__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #ffffff;
+}
+
+.lb__count {
+  font-size: 13.5px;
+  font-weight: 700;
+  direction: ltr;
+}
+
+.lb__close,
+.lb__arrow {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .45);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color var(--t) var(--ease), background-color var(--t) var(--ease);
+}
+
+.lb__close:hover,
+.lb__arrow:hover {
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, .14);
+}
+
+.lb__nav { justify-content: center; }
+
+.lb__stage {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.lb__stage svg {
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+/* ---------- 14. الحركة (200ms فقط) ---------- */
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  main > .section {
+    animation: reveal var(--t) var(--ease) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- 15. الاستجابة ---------- */
+@media (max-width: 1024px) {
+  .hero__in { gap: 32px; }
+  .hero__art { padding: 14px; }
+}
+
+@media (max-width: 900px) {
+  :root { --section-y: 48px; }
+
+  body { padding-block-end: 74px; }
+
+  /* القائمة الجانبية — تفتح من اليمين */
+  .nav {
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    z-index: 130;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: min(86vw, 340px);
+    padding: 18px;
+    background: var(--surface);
+    border-inline-start: 1px solid var(--line);
+    transform: translateX(102%);
+    visibility: hidden;
+    transition: transform var(--t) var(--ease), visibility var(--t) var(--ease);
+  }
+
+  html.nav-open .nav {
+    transform: none;
+    visibility: visible;
+  }
+
+  .nav__list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+  }
+
+  .nav__list a {
+    min-height: 48px;
+    padding-inline: 12px;
+    font-size: 15.5px;
+    border-block-end: 1px solid var(--line);
+    border-radius: 0;
+  }
+
+  .nav__list a:hover { background: transparent; }
+
+  .nav__foot {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-block-start: auto;
+    padding-block-start: 18px;
+    border-block-start: 1px solid var(--line);
+  }
+
+  .nav__phone {
+    display: grid;
+    place-items: center;
+    min-height: 48px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--accent-text);
+  }
+
+  .header__call { display: none; }
+  .header__actions .btn--solid { display: none; }
+  .burger { display: grid; }
+
+  .header__in { gap: 10px; }
+
+  .brand__text small { display: none; }
+
+  .mobilebar { display: grid; }
+
+  /* عناوين وأزرار في الوسط، فقرات من اليمين */
+  .section h1,
+  .section h2 { text-align: center; }
+
+  .hero__lead,
+  .lead { text-align: start; margin-inline: auto; }
+
+  .hero__text { text-align: center; }
+  .hero__lead { text-align: start; }
+  .hero__actions { justify-content: center; }
+  .hero__facts { justify-content: center; }
+
+  .hero__in {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .hero__art { order: -1; }
+
+  .cards,
+  .features,
+  .areas,
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+
+  .composer { padding: 18px; }
+  .info { padding: 16px; }
+
+  .composer__actions .btn { flex: 1 1 auto; }
+
+  .work { width: min(76vw, 300px); }
+
+  .footer__in { padding-inline: 8px; }
+}
+
+@media (max-width: 480px) {
+  .wrap { padding-inline: 16px; }
+  .brand__mark { width: 34px; height: 34px; }
+  .brand__text strong { font-size: 14px; }
+  .chip { padding-inline: 14px; font-size: 14px; }
+  .composer { padding: 16px; border-radius: var(--radius); }
+  .works { gap: 10px; }
+}
+
+/* ---------- 16. تباين عالٍ ---------- */
+@media (prefers-contrast: more) {
+  :root {
+    --line: #9fb3b0;
+    --text-2: #1f3431;
+    --muted: #33504c;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main" data-t="ui.skip"></a>
+
+<!-- 1) الهيدر -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap header__in">
+    <a class="brand" href="#home" data-a="aria-label:brand.name">
+      <span class="brand__mark" data-logo aria-hidden="true"></span>
+      <span class="brand__text">
+        <strong data-t="brand.name"></strong>
+        <small data-t="brand.tagline"></small>
+      </span>
+    </a>
+
+    <div class="header__actions">
+      <a class="btn btn--ghost btn--sm header__call" data-link="tel" data-a="aria-label:ui.callAria">
+        <svg data-icon="phone"></svg>
+        <span data-t="ui.callShort"></span>
+      </a>
+      <a class="btn btn--solid btn--sm" href="#contact" data-t="ui.orderNow"></a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav" data-a="aria-label:ui.menuOpen">
+        <span class="burger__box" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+
+    <nav class="nav" id="nav" data-a="aria-label:ui.navLabel">
+      <ul class="nav__list">
+        <li><a href="#home" data-t="ui.nav.home"></a></li>
+        <li><a href="#services" data-t="ui.nav.services"></a></li>
+        <li><a href="#works" data-t="ui.nav.works"></a></li>
+        <li><a href="#areas" data-t="ui.nav.areas"></a></li>
+        <li><a href="#contact" data-t="ui.nav.contact"></a></li>
+      </ul>
+      <div class="nav__foot">
+        <a class="btn btn--solid btn--block" href="#contact" data-t="ui.orderNow"></a>
+        <a class="nav__phone" data-link="tel"><bdi dir="ltr" data-t="contact.phoneDisplay"></bdi></a>
+      </div>
+    </nav>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<main id="main">
+
+  <!-- 2) الواجهة -->
+  <section class="section hero" id="home" aria-labelledby="heroTitle">
+    <div class="wrap hero__in">
+      <div class="hero__text">
+        <p class="status" id="statusBadge" hidden>
+          <span class="status__dot" aria-hidden="true"></span>
+          <span id="statusText"></span>
+        </p>
+        <h1 id="heroTitle" data-t="hero.title"></h1>
+        <p class="hero__lead" data-t="hero.lead"></p>
+        <div class="hero__actions">
+          <a class="btn btn--solid btn--lg" href="#contact" data-t="hero.cta"></a>
+        </div>
+        <ul class="hero__facts" id="factsList"></ul>
+      </div>
+
+      <div class="hero__art" aria-hidden="true">
+        <svg viewBox="0 0 420 340" focusable="false">
+          <g fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="46" y="42" width="150" height="86" rx="6" opacity=".8"/>
+            <rect x="212" y="42" width="162" height="86" rx="6" opacity=".8"/>
+            <path d="M121 42v86M293 42v86" opacity=".8"/>
+            <path d="M112 80v14M302 80v14" opacity=".8"/>
+            <path d="M28 168h364" stroke-width="2.8"/>
+            <rect x="40" y="172" width="340" height="98" rx="6" opacity=".9"/>
+            <path d="M152 172v98M264 172v98" opacity=".9"/>
+            <path d="M40 212h112M264 212h116" opacity=".9"/>
+            <circle cx="116" cy="192" r="2.4"/><circle cx="240" cy="192" r="2.4"/>
+            <circle cx="132" cy="246" r="2.4"/><circle cx="288" cy="246" r="2.4"/>
+            <rect x="68" y="154" width="92" height="14" rx="4"/>
+            <path d="M114 154v-24h-16"/>
+            <path d="M46 296h328" opacity=".35"/>
+            <path d="M104 296v14M316 296v14" opacity=".35"/>
+          </g>
+        </svg>
+        <div class="hero__art-foot">
+          <span data-t="hero.artA"></span>
+          <span data-t="hero.artB"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3) الخدمات -->
+  <section class="section section--tint" id="services" aria-labelledby="servicesTitle">
+    <div class="wrap">
+      <h2 id="servicesTitle" data-t="services.title"></h2>
+      <p class="lead" data-t="services.lead"></p>
+      <div class="cards" id="servicesGrid"></div>
+      <ul class="features" id="featuresList"></ul>
+    </div>
+  </section>
+
+  <!-- 4) أعمالنا -->
+  <section class="section" id="works" aria-labelledby="worksTitle">
+    <div class="wrap">
+      <h2 id="worksTitle" data-t="works.title"></h2>
+      <p class="lead" data-t="works.lead"></p>
+      <div class="works" id="worksGrid" tabindex="0" data-a="aria-label:works.title"></div>
+      <p class="works__hint" data-t="works.hint"></p>
+    </div>
+  </section>
+
+  <!-- 5) مناطق الخدمة -->
+  <section class="section section--tint" id="areas" aria-labelledby="areasTitle">
+    <div class="wrap">
+      <h2 id="areasTitle" data-t="areas.title"></h2>
+      <p class="lead" data-t="areas.lead"></p>
+      <ul class="areas" id="areasList"></ul>
+      <p class="areas__note" data-t="areas.note"></p>
+    </div>
+  </section>
+
+  <!-- 6) التواصل -->
+  <section class="section" id="contact" aria-labelledby="contactTitle">
+    <div class="wrap">
+      <h2 id="contactTitle" data-t="contactSec.title"></h2>
+      <p class="lead" data-t="contactSec.lead"></p>
+
+      <div class="composer">
+        <div class="composer__step">
+          <p class="composer__label"><span class="composer__num" aria-hidden="true">1</span><span data-t="order.step1"></span></p>
+          <div class="chips" id="serviceChips" role="group" data-a="aria-label:order.step1"></div>
+        </div>
+
+        <div class="composer__step">
+          <p class="composer__label"><span class="composer__num" aria-hidden="true">2</span><span data-t="order.step2"></span></p>
+          <div class="chips" id="districtChips" role="group" data-a="aria-label:order.step2"></div>
+        </div>
+
+        <div class="composer__step">
+          <p class="composer__label"><span class="composer__num" aria-hidden="true">3</span><span data-t="order.step3"></span></p>
+          <div class="chips" id="timeChips" role="group" data-a="aria-label:order.step3"></div>
+        </div>
+
+        <details class="note">
+          <summary data-t="order.noteLabel"></summary>
+          <textarea id="noteInput" rows="2" data-a="placeholder:order.notePlaceholder;aria-label:order.noteLabel"></textarea>
+        </details>
+
+        <p class="composer__summary" id="orderSummary" aria-live="polite"></p>
+
+        <div class="composer__actions">
+          <button class="btn btn--solid btn--lg" id="sendBtn" type="button" disabled data-t="order.send"></button>
+          <a class="btn btn--ghost btn--lg" data-link="tel" data-a="aria-label:ui.callAria">
+            <svg data-icon="phone"></svg>
+            <span data-t="ui.callNow"></span>
+          </a>
+        </div>
+        <p class="composer__hint" data-t="order.hint"></p>
+      </div>
+
+      <div class="contact-info">
+        <div class="map">
+          <iframe id="mapFrame" loading="lazy" height="300" allowfullscreen
+                  referrerpolicy="no-referrer-when-downgrade"
+                  data-a="src:contact.mapEmbed;title:contactSec.mapTitle"></iframe>
+          <div class="map__foot">
+            <a class="btn btn--ghost" data-link="map" data-t="contactSec.directions"></a>
+          </div>
+        </div>
+
+        <div class="info">
+          <p class="info__label" data-t="contactSec.hoursLabel"></p>
+          <ul class="hours" id="hoursList"></ul>
+          <p class="info__label" data-t="contactSec.reviewsLabel"></p>
+          <a class="link" data-link="reviews" data-t="contactSec.reviewsCta"></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 7) الفوتر -->
+<footer class="site-footer">
+  <div class="wrap footer__in">
+    <p class="footer__name" data-t="brand.name"></p>
+    <p class="footer__meta" data-t="brand.tagline"></p>
+    <p class="footer__credit" data-t="footer.designedBy"></p>
+    <p class="footer__demo" data-t="footer.demo"></p>
+  </div>
+</footer>
+
+<!-- 8) شريط الجوال الثابت -->
+<div class="mobilebar" id="mobileBar">
+  <p class="mobilebar__status" id="barStatus">
+    <span class="status__dot" aria-hidden="true"></span>
+    <span id="barStatusText"></span>
+  </p>
+  <a class="btn btn--solid mobilebar__order" href="#contact" data-t="ui.orderShort"></a>
+  <a class="mobilebar__call" data-link="tel" data-a="aria-label:ui.callAria">
+    <svg data-icon="phone"></svg>
+  </a>
+</div>
+
+<!-- نافذة عرض العمل -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" data-a="aria-label:works.title" hidden>
+  <div class="lb__bar">
+    <span class="lb__count" id="lbCount"></span>
+    <button class="lb__close" id="lbClose" type="button" data-a="aria-label:works.close">✕</button>
+  </div>
+  <div class="lb__stage" id="lbStage"></div>
+  <div class="lb__nav">
+    <button class="lb__arrow" id="lbNext" type="button" data-a="aria-label:works.next">‹</button>
+    <button class="lb__arrow" id="lbPrev" type="button" data-a="aria-label:works.prev">›</button>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   فني مطابخ صيانة وتفصيل — بيانات الموقع + منطق الواجهة
+   كل القيم في SITE_DATA فقط. لا مكتبات، لا fetch، لا modules.
+   ========================================================= */
+
+var SITE_DATA = {
+
+  meta: {
+    title: "فني مطابخ صيانة وتفصيل | تفصيل وصيانة مطابخ ألمنيوم",          // TEMP
+    description: "تفصيل وصيانة مطابخ ألمنيوم في الرياض — حي اليرموك. تفصيل على المقاس، صيانة، فك ونقل وتركيب، تعديل لغسالة الصحون، وفحص كامل للمطبخ.", // TEMP
+    author: "فني مطابخ صيانة وتفصيل",                                       // TEMP
+    canonical: "https://demo-kitchen.example/",                             // TEMP
+    siteName: "فني مطابخ صيانة وتفصيل",                                     // TEMP
+    locale: "ar_SA",                                                        // TEMP
+    themeLight: "#0f766e",                                                  // TEMP
+    themeDark: "#0a1211"                                                    // TEMP
+  },
+
+  brand: {
+    name: "فني مطابخ صيانة وتفصيل",                                         // TEMP
+    tagline: "تفصيل وصيانة مطابخ ألمنيوم — الرياض"                          // TEMP
+  },
+
+  logo: {
+    viewBox: "0 0 64 64",                                                   // TEMP
+    strokeWidth: 3.2,                                                       // TEMP
+    bg: "#0f766e",                                                          // TEMP
+    fg: "#ffffff",                                                          // TEMP
+    shapes: [
+      { t: "path", d: "M18 24h12v22H18z" },                                 // TEMP
+      { t: "path", d: "M21.5 31v6" },                                       // TEMP
+      { t: "path", d: "M34 44 46 26" },                                     // TEMP
+      { t: "path", d: "M43.6 24.4 47.8 28.2" },                             // TEMP
+      { t: "path", d: "M16 46h32" }                                         // TEMP
+    ]
+  },
+
+  contact: {
+    phoneDisplay: "+966 55 446 7995",                                       // TEMP
+    phoneE164: "+966554467995",                                             // TEMP
+    whatsapp: "966554467995",                                               // TEMP
+    mapUrl: "https://maps.app.goo.gl/TRyJFnWKv7b6qiy46",                    // TEMP
+    mapEmbed: "https://maps.google.com/maps?q=24.8161862,46.7968111&hl=ar&z=16&output=embed", // TEMP
+    city: "الرياض",                                                         // TEMP
+    district: "حي اليرموك"                                                  // TEMP
+  },
+
+  hours: {
+    timeZone: "Asia/Riyadh",                                                // TEMP
+    days: [
+      { key: "sat", name: "السبت", schema: "Saturday" },                    // TEMP
+      { key: "sun", name: "الأحد", schema: "Sunday" },                      // TEMP
+      { key: "mon", name: "الاثنين", schema: "Monday" },                    // TEMP
+      { key: "tue", name: "الثلاثاء", schema: "Tuesday" },                  // TEMP
+      { key: "wed", name: "الأربعاء", schema: "Wednesday" },                // TEMP
+      { key: "thu", name: "الخميس", schema: "Thursday" },                   // TEMP
+      { key: "fri", name: "الجمعة", schema: "Friday" }                      // TEMP
+    ],
+    schedule: {
+      sat: ["09:00", "21:00"],                                              // TEMP
+      sun: ["09:00", "21:00"],                                              // TEMP
+      mon: ["09:00", "21:00"],                                              // TEMP
+      tue: ["09:00", "21:00"],                                              // TEMP
+      wed: ["09:00", "21:00"],                                              // TEMP
+      thu: ["09:00", "21:00"],                                              // TEMP
+      fri: null                                                             // TEMP — مغلق
+    }
+  },
+
+  ui: {
+    skip: "تخطَّ إلى المحتوى",                                              // TEMP
+    navLabel: "التنقل الرئيسي",                                             // TEMP
+    menuOpen: "فتح القائمة",                                                // TEMP
+    menuClose: "إغلاق القائمة",                                             // TEMP
+    nav: {
+      home: "الرئيسية",                                                     // TEMP
+      services: "خدماتنا",                                                  // TEMP
+      works: "أعمالنا",                                                     // TEMP
+      areas: "مناطق الخدمة",                                                // TEMP
+      contact: "تواصل"                                                      // TEMP
+    },
+    orderNow: "اطلب الآن",                                                  // TEMP
+    orderShort: "اطلب",                                                     // TEMP
+    callShort: "اتصال",                                                     // TEMP
+    callNow: "اتصل بنا",                                                    // TEMP
+    callAria: "اتصال هاتفي بالنشاط",                                        // TEMP
+    statusOpen: "مفتوح الآن حتى",                                           // TEMP
+    statusClosed: "مغلق الآن",                                              // TEMP
+    opens: "يفتح",                                                          // TEMP
+    tomorrow: "غداً"                                                        // TEMP
+  },
+
+  hero: {
+    title: "تفصيل وصيانة مطابخ ألمنيوم في الرياض — حي اليرموك",             // TEMP
+    lead: "نفصّل المطابخ على المقاس، ونصلح المفصلات والأدراج، ونفك وننقل ونركّب، ونعدّل المطبخ لغسالة الصحون، بعد فحص كامل يحدّد ما يحتاج تغييراً وما لا يحتاج.", // TEMP
+    cta: "اطلب الآن",                                                       // TEMP
+    artA: "تفصيل على المقاس",                                               // TEMP
+    artB: "صيانة وتعديل",                                                   // TEMP
+    facts: [
+      { icon: "pin", text: "الرياض — حي اليرموك" },                          // TEMP
+      { icon: "clock", text: "السبت–الخميس 9ص–9م" },                         // TEMP
+      { icon: "tool", text: "تفصيل حسب الطلب" }                              // TEMP
+    ]
+  },
+
+  services: {
+    title: "خدماتنا",                                                       // TEMP
+    lead: "خمس خدمات نغطي بها كل ما يحتاجه مطبخ الألمنيوم، من التفصيل حتى الصيانة والتعديل.", // TEMP
+    cardCta: "اطلب",                                                        // TEMP
+    items: [
+      {
+        id: "detail",                                                       // TEMP
+        title: "تفصيل مطابخ ألمنيوم",                                        // TEMP
+        desc: "تفصيل على المقاس والمواصفات للقطاعين الخاص والعام.",           // TEMP
+        icon: '<rect x="3.5" y="3.5" width="17" height="17" rx="2.5"/><path d="M12 3.5v17M3.5 12h17"/><path d="M7.2 7.9h1.8M7.2 16.1h1.8"/>'
+      },
+      {
+        id: "maintenance",                                                  // TEMP
+        title: "صيانة مطابخ ألمنيوم",                                        // TEMP
+        desc: "إصلاح المفصلات والأدراج والأبواب وإعادة ضبط المطبخ.",          // TEMP
+        icon: '<path d="M15.6 4.2a4.4 4.4 0 0 0-6 5.7L4 15.5V20h4.5l5.6-5.6a4.4 4.4 0 0 0 5.7-6l-3 3-2.8-2.8 2.6-2.4Z"/>'
+      },
+      {
+        id: "move",                                                         // TEMP
+        title: "فك ونقل وتركيب مطابخ",                                       // TEMP
+        desc: "فك المطبخ ونقله وتركيبه في الموقع الجديد.",                    // TEMP
+        icon: '<path d="M3 7.5h11v8.5H3z"/><path d="M14 10.5h3.6L21 13.6V16h-7z"/><circle cx="7" cy="18.2" r="1.6"/><circle cx="17.4" cy="18.2" r="1.6"/>'
+      },
+      {
+        id: "dishwasher",                                                   // TEMP
+        title: "تعديل المطبخ لغسالة الصحون",                                  // TEMP
+        desc: "توسيع أو تعديل الوحدة لإدخال الغسالة.",                        // TEMP
+        icon: '<rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M4 8h16"/><path d="M8 5.5h.01M11 5.5h.01"/><circle cx="12" cy="14.5" r="3.3"/>'
+      },
+      {
+        id: "inspection",                                                   // TEMP
+        title: "فحص المطبخ كامل",                                            // TEMP
+        desc: "تحديد ما يحتاج تغييراً وما لا يحتاج قبل الصيانة.",             // TEMP
+        icon: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.4 15.4 21 21"/><path d="m8 10.7 1.8 1.8 3.6-3.7"/>'
+      }
+    ]
+  },
+
+  features: {
+    items: [
+      "الالتزام بالمواعيد",                                                 // TEMP
+      "سرعة التنفيذ",                                                       // TEMP
+      "نظافة العمل",                                                        // TEMP
+      "الأمانة في تحديد ما يستحق التغيير"                                    // TEMP
+    ]
+  },
+
+  works: {
+    title: "أعمالنا",                                                       // TEMP
+    lead: "مساحة مخصّصة لعرض صور الأعمال. اضغط على أي مربّع لعرضه بحجم أكبر.", // TEMP
+    hint: "اسحب يميناً أو يساراً لعرض بقية الأعمال",                          // TEMP
+    itemLabel: "صورة عمل هنا",                                              // TEMP
+    close: "إغلاق",                                                         // TEMP
+    next: "التالي",                                                         // TEMP
+    prev: "السابق",                                                         // TEMP
+    icons: [
+      '<rect x="5" y="4" width="14" height="16" rx="2"/><path d="M12 4v16M5 12h14"/><path d="M8 8h1M8 16h1"/>',  // TEMP
+      '<path d="M4 10h16"/><path d="M6 10v9h12v-9"/><path d="M9 10V7h6v3"/>',                                   // TEMP
+      '<rect x="4" y="6" width="16" height="12" rx="2"/><path d="M4 12h16"/><path d="M10 12v6M14 12v6"/>',       // TEMP
+      '<circle cx="8" cy="12" r="2.4"/><circle cx="16" cy="12" r="2.4"/><path d="M10.4 12h3.2"/>',               // TEMP
+      '<path d="M3 9h18"/><path d="M5 9v9h14V9"/><path d="M9 5h6"/>',                                           // TEMP
+      '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M12 3v18"/><path d="M15 11v3"/>'                // TEMP
+    ]
+  },
+
+  areas: {
+    title: "مناطق الخدمة",                                                  // TEMP
+    lead: "نخدم هذه الأحياء في مدينة الرياض.",                               // TEMP
+    note: "لم تجد حيّك؟ اختر «حي آخر» في نموذج الطلب.",                      // TEMP
+    prefix: "حي"                                                            // TEMP
+  },
+
+  contactSec: {
+    title: "تواصل واطلب",                                                   // TEMP
+    lead: "الخريطة وساعات الدوام ونموذج الطلب في مكان واحد.",                // TEMP
+    hoursLabel: "ساعات الدوام",                                             // TEMP
+    reviewsLabel: "تقييمات العملاء",                                        // TEMP
+    reviewsCta: "اقرأ تقييمات النشاط على خرائط جوجل",                        // TEMP
+    reviewsUrl: "https://maps.app.goo.gl/TRyJFnWKv7b6qiy46",                // TEMP
+    mapTitle: "خريطة موقع فني مطابخ صيانة وتفصيل — الرياض",                  // TEMP
+    directions: "فتح الموقع على الخريطة",                                    // TEMP
+    closed: "مغلق"                                                          // TEMP
+  },
+
+  order: {
+    step1: "الخدمة",                                                        // TEMP
+    step2: "الحي",                                                          // TEMP
+    step3: "الوقت",                                                         // TEMP
+    otherDistrict: "حي آخر",                                                // TEMP
+    noteLabel: "ملاحظة (اختياري)",                                          // TEMP
+    notePlaceholder: "أي تفاصيل إضافية عن المطبخ أو الموقع…",                // TEMP
+    notePrefix: "ملاحظة:",                                                  // TEMP
+    send: "أرسل عبر واتساب",                                                // TEMP
+    hint: "لا تُحفظ بياناتك على الموقع؛ الرسالة تُفتح في واتساب لتراجعها قبل الإرسال.", // TEMP
+    summaryEmpty: "اختر الخدمة والحي والوقت للمتابعة.",                      // TEMP
+    summaryPrefix: "اختياراتك:",                                            // TEMP
+    msgTemplate: "السلام عليكم، أحتاج {service} في {district}، الوقت: {time}. (طلب من موقعكم)" // TEMP
+  },
+
+  footer: {
+    designedBy: "تصميم وتطوير فورتك سوفت",                                  // TEMP
+    demo: "TEMP-DEMO — نسخة عرض أولية، البيانات قابلة للتحديث."             // TEMP
+  },
+
+  districts: [
+    "اليرموك",                                                              // TEMP
+    "المنصورة",                                                             // TEMP
+    "الشفا",                                                                // TEMP
+    "الحائر",                                                               // TEMP
+    "بدر",                                                                  // TEMP
+    "الدار البيضاء",                                                        // TEMP
+    "العزيزية"                                                              // TEMP
+  ],
+
+  times: ["الآن", "اليوم", "غداً"],                                          // TEMP
+
+  icons: {
+    phone: '<path d="M6.6 3.5h2.3l1.6 4-2 1.4a11.6 11.6 0 0 0 5 5l1.4-2 4 1.6v2.3A2.6 2.6 0 0 1 16.3 18C9.8 17.5 4.5 12.2 4 5.7A2.6 2.6 0 0 1 6.6 3.5Z"/>', // TEMP
+    pin: '<path d="M12 21s6.6-5.4 6.6-10.4a6.6 6.6 0 1 0-13.2 0C5.4 15.6 12 21 12 21Z"/><circle cx="12" cy="10.4" r="2.4"/>', // TEMP
+    clock: '<circle cx="12" cy="12" r="8.4"/><path d="M12 7.6V12l3 1.9"/>', // TEMP
+    tool: '<path d="M14.5 3.6a4.6 4.6 0 0 0 5.9 5.9l-8.6 8.6a3.2 3.2 0 0 1-4.5-4.5Z"/><path d="M5.6 19.4 4 21"/>', // TEMP
+    check: '<path d="m5 12.5 4.2 4.2L19 7"/>'                              // TEMP
+  }
+};
+
+/* =========================================================
+   المنطق
+   ========================================================= */
+(function () {
+  "use strict";
+
+  var $ = function (sel, root) { return (root || document).querySelector(sel); };
+  var $$ = function (sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  };
+
+  function get(path) {
+    var parts = path.split("."), cur = SITE_DATA, i;
+    for (i = 0; i < parts.length; i++) {
+      if (cur === null || typeof cur === "undefined") return null;
+      cur = cur[parts[i]];
+    }
+    return (cur === null || typeof cur === "undefined") ? null : cur;
+  }
+
+  function pad2(n) { return (n < 10 ? "0" : "") + n; }
+
+  function reduced() {
+    return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }
+
+  function svgWrap(paths, cls) {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" ' +
+      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"' +
+      (cls ? ' class="' + cls + '"' : "") + ">" + paths + "</svg>";
+  }
+
+  /* ---------- الشعار + favicon ---------- */
+  function logoShapes() {
+    return SITE_DATA.logo.shapes.map(function (s) {
+      if (s.t === "rect") {
+        return '<rect x="' + s.x + '" y="' + s.y + '" width="' + s.w + '" height="' + s.h + '" rx="' + s.r + '"/>';
+      }
+      return '<path d="' + s.d + '"/>';
+    }).join("");
+  }
+
+  function renderLogo() {
+    var host = $("[data-logo]");
+    if (!host) return;
+    host.innerHTML =
+      '<svg viewBox="' + SITE_DATA.logo.viewBox + '" focusable="false" aria-hidden="true">' +
+      '<rect width="64" height="64" rx="15" fill="' + SITE_DATA.logo.bg + '"/>' +
+      '<g fill="none" stroke="' + SITE_DATA.logo.fg + '" stroke-width="' + SITE_DATA.logo.strokeWidth +
+      '" stroke-linecap="round" stroke-linejoin="round">' + logoShapes() + "</g></svg>";
+  }
+
+  function buildFavicon() {
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">' +
+      '<rect width="64" height="64" rx="15" fill="' + SITE_DATA.logo.bg + '"/>' +
+      '<g fill="none" stroke="' + SITE_DATA.logo.fg + '" stroke-width="' + SITE_DATA.logo.strokeWidth +
+      '" stroke-linecap="round" stroke-linejoin="round">' + logoShapes() + "</g></svg>";
+    return "data:image/svg+xml," + encodeURIComponent(svg);
+  }
+
+  /* ---------- الميتا ---------- */
+  function applyMeta() {
+    document.title = SITE_DATA.meta.title;
+    var desc = $('meta[name="description"]');
+    if (desc) desc.setAttribute("content", SITE_DATA.meta.description);
+    var author = $('meta[name="author"]');
+    if (author) author.setAttribute("content", SITE_DATA.meta.author);
+    var theme = $('meta[name="theme-color"]');
+    if (theme) theme.setAttribute("content", SITE_DATA.meta.themeLight);
+    var canon = $("#canonical");
+    if (canon) canon.setAttribute("href", SITE_DATA.meta.canonical);
+    var og = {
+      ogSiteName: SITE_DATA.meta.siteName,
+      ogTitle: SITE_DATA.meta.title,
+      ogDescription: SITE_DATA.meta.description,
+      ogUrl: SITE_DATA.meta.canonical
+    };
+    Object.keys(og).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.setAttribute("content", og[id]);
+    });
+    var icon = $("#favicon");
+    if (icon) icon.setAttribute("href", buildFavicon());
+  }
+
+  /* ---------- ربط النصوص والخصائص ---------- */
+  function applyText() {
+    $$("[data-t]").forEach(function (el) {
+      var v = get(el.getAttribute("data-t"));
+      if (v !== null) el.textContent = v;
+    });
+  }
+
+  function applyAttrs() {
+    $$("[data-a]").forEach(function (el) {
+      el.getAttribute("data-a").split(";").forEach(function (pair) {
+        var i = pair.indexOf(":");
+        if (i < 0) return;
+        var attr = pair.slice(0, i).trim();
+        var v = get(pair.slice(i + 1).trim());
+        if (attr && v !== null) el.setAttribute(attr, v);
+      });
+    });
+  }
+
+  function applyLinks() {
+    $$('[data-link="tel"]').forEach(function (a) {
+      a.setAttribute("href", "tel:" + SITE_DATA.contact.phoneE164);
+    });
+    $$('[data-link="map"]').forEach(function (a) {
+      a.setAttribute("href", SITE_DATA.contact.mapUrl);
+      a.setAttribute("target", "_blank");
+      a.setAttribute("rel", "noopener");
+    });
+    $$('[data-link="reviews"]').forEach(function (a) {
+      a.setAttribute("href", SITE_DATA.contactSec.reviewsUrl);
+      a.setAttribute("target", "_blank");
+      a.setAttribute("rel", "noopener");
+    });
+  }
+
+  function applyIcons() {
+    $$("[data-icon]").forEach(function (el) {
+      var name = el.getAttribute("data-icon");
+      var paths = SITE_DATA.icons[name];
+      if (!paths) return;
+      el.setAttribute("viewBox", "0 0 24 24");
+      el.setAttribute("fill", "none");
+      el.setAttribute("stroke", "currentColor");
+      el.setAttribute("stroke-width", "1.7");
+      el.setAttribute("stroke-linecap", "round");
+      el.setAttribute("stroke-linejoin", "round");
+      el.setAttribute("aria-hidden", "true");
+      el.setAttribute("focusable", "false");
+      el.innerHTML = paths;
+    });
+  }
+
+  /* ---------- JSON-LD ---------- */
+  function injectJsonLd() {
+    var hours = [];
+    SITE_DATA.hours.days.forEach(function (d) {
+      var s = SITE_DATA.hours.schedule[d.key];
+      if (!s) return;
+      hours.push({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "https://schema.org/" + d.schema,
+        opens: s[0],
+        closes: s[1]
+      });
+    });
+
+    var data = {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      name: SITE_DATA.brand.name,
+      description: SITE_DATA.meta.description,
+      url: SITE_DATA.meta.canonical,
+      telephone: SITE_DATA.contact.phoneE164,
+      logo: buildFavicon(),
+      image: buildFavicon(),
+      hasMap: SITE_DATA.contact.mapUrl,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: SITE_DATA.contact.district,
+        addressLocality: SITE_DATA.contact.city,
+        addressCountry: "SA"
+      },
+      areaServed: {
+        "@type": "City",
+        name: SITE_DATA.contact.city,
+        containsPlace: SITE_DATA.districts.map(function (d) {
+          return { "@type": "AdministrativeArea", name: d };
+        })
+      },
+      openingHoursSpecification: hours,
+      makesOffer: SITE_DATA.services.items.map(function (s) {
+        return { "@type": "Offer", itemOffered: { "@type": "Service", name: s.title } };
+      })
+    };
+
+    var tag = document.createElement("script");
+    tag.type = "application/ld+json";
+    tag.textContent = JSON.stringify(data);
+    document.head.appendChild(tag);
+  }
+
+  /* ---------- الوقت والحالة ---------- */
+  var DAY_KEYS = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  var SCHEMA_MAP = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+
+  function riyadhNow() {
+    if (typeof Intl !== "undefined" && Intl.DateTimeFormat) {
+      try {
+        var parts = new Intl.DateTimeFormat("en-US", {
+          timeZone: SITE_DATA.hours.timeZone,
+          weekday: "short",
+          hour: "2-digit",
+          minute: "2-digit",
+          hourCycle: "h23"
+        }).formatToParts(new Date());
+        var map = {};
+        parts.forEach(function (p) { if (p.type !== "literal") map[p.type] = p.value; });
+        var idx = SCHEMA_MAP[map.weekday];
+        if (typeof idx === "number") {
+          return { index: idx, key: DAY_KEYS[idx], minutes: (Number(map.hour) % 24) * 60 + Number(map.minute) };
+        }
+      } catch (e) { /* احتياطي */ }
+    }
+    var d = new Date(Date.now() + 3 * 3600 * 1000);
+    return { index: d.getUTCDay(), key: DAY_KEYS[d.getUTCDay()], minutes: d.getUTCHours() * 60 + d.getUTCMinutes() };
+  }
+
+  function toMin(hhmm) {
+    var p = String(hhmm).split(":");
+    return Number(p[0]) * 60 + Number(p[1]);
+  }
+
+  function fmtClock(hhmm) {
+    var p = String(hhmm).split(":");
+    var h = Number(p[0]);
+    var suffix = h < 12 ? "ص" : "م";
+    var h12 = h % 12;
+    if (h12 === 0) h12 = 12;
+    return h12 + (p[1] === "00" ? "" : ":" + p[1]) + " " + suffix;
+  }
+
+  function dayName(key) {
+    var found = SITE_DATA.hours.days.filter(function (d) { return d.key === key; })[0];
+    return found ? found.name : "";
+  }
+
+  function shiftOpen(sch, minutes) {
+    var o = toMin(sch[0]), c = toMin(sch[1]);
+    if (c > o) return minutes >= o && minutes < c;
+    return minutes >= o || minutes < c; /* يمتد بعد منتصف الليل */
+  }
+
+  function computeStatus() {
+    var now = riyadhNow();
+    var sch = SITE_DATA.hours.schedule[now.key];
+
+    if (sch && shiftOpen(sch, now.minutes)) {
+      return { open: true, text: SITE_DATA.ui.statusOpen + " " + fmtClock(sch[1]) };
+    }
+
+    /* وردية أمس إن امتدت بعد منتصف الليل */
+    var prevKey = DAY_KEYS[(now.index + 6) % 7];
+    var prev = SITE_DATA.hours.schedule[prevKey];
+    if (prev) {
+      var o = toMin(prev[0]), c = toMin(prev[1]);
+      if (c <= o && now.minutes < c) {
+        return { open: true, text: SITE_DATA.ui.statusOpen + " " + fmtClock(prev[1]) };
+      }
+    }
+
+    for (var i = 0; i < 8; i++) {
+      var key = DAY_KEYS[(now.index + i) % 7];
+      var s = SITE_DATA.hours.schedule[key];
+      if (!s) continue;
+      if (i === 0 && now.minutes < toMin(s[0])) {
+        return { open: false, text: SITE_DATA.ui.statusClosed + "، " + SITE_DATA.ui.opens + " " + fmtClock(s[0]) };
+      }
+      if (i > 0) {
+        var when = i === 1 ? SITE_DATA.ui.tomorrow : dayName(key);
+        return { open: false, text: SITE_DATA.ui.statusClosed + "، " + SITE_DATA.ui.opens + " " + when + " " + fmtClock(s[0]) };
+      }
+    }
+    return { open: false, text: SITE_DATA.ui.statusClosed };
+  }
+
+  function renderStatus() {
+    var st = computeStatus();
+    var badge = $("#statusBadge");
+    var text = $("#statusText");
+    if (badge && text) {
+      badge.classList.toggle("is-open", st.open);
+      badge.classList.toggle("is-closed", !st.open);
+      text.textContent = st.text;
+      badge.hidden = false;
+    }
+    var barText = $("#barStatusText");
+    if (barText) barText.textContent = st.text;
+    var bar = $("#barStatus");
+    if (bar) bar.classList.toggle("is-open", st.open);
+  }
+
+  function renderHours() {
+    var list = $("#hoursList");
+    if (!list) return;
+    var todayKey = riyadhNow().key;
+    list.innerHTML = SITE_DATA.hours.days.map(function (d) {
+      var s = SITE_DATA.hours.schedule[d.key];
+      var val = s ? fmtClock(s[0]) + " – " + fmtClock(s[1]) : SITE_DATA.contactSec.closed;
+      var cls = (d.key === todayKey ? "is-today " : "") + (s ? "" : "is-off");
+      return '<li class="' + cls.trim() + '"><span>' + d.name + "</span><b>" + val + "</b></li>";
+    }).join("");
+  }
+
+  /* ---------- الخدمات ---------- */
+  function renderServices() {
+    var grid = $("#servicesGrid");
+    if (!grid) return;
+    grid.innerHTML = SITE_DATA.services.items.map(function (s) {
+      return '<article class="card">' +
+        '<span class="card__ico">' + svgWrap(s.icon) + "</span>" +
+        "<h3>" + s.title + "</h3>" +
+        "<p>" + s.desc + "</p>" +
+        '<button class="card__order" type="button" data-service="' + s.id + '">' +
+        SITE_DATA.services.cardCta + "</button>" +
+        "</article>";
+    }).join("");
+  }
+
+  function renderFacts() {
+    var list = $("#factsList");
+    if (!list) return;
+    list.innerHTML = SITE_DATA.hero.facts.map(function (f) {
+      var icon = SITE_DATA.icons[f.icon] || SITE_DATA.icons.tool;
+      return "<li>" + svgWrap(icon) + "<span>" + f.text + "</span></li>";
+    }).join("");
+  }
+
+  function renderFeatures() {
+    var list = $("#featuresList");
+    if (!list) return;
+    list.innerHTML = SITE_DATA.features.items.map(function (f) {
+      return "<li>" + svgWrap(SITE_DATA.icons.check, "feature__ico") + "<span>" + f + "</span></li>";
+    }).join("");
+  }
+
+  /* ---------- أعمالنا ---------- */
+  function workArt(i) {
+    var n = SITE_DATA.works.icons.length;
+    var icon = SITE_DATA.works.icons[i % n];
+    return '<svg viewBox="0 0 400 300" role="img" aria-label="' + SITE_DATA.works.itemLabel + " " + (i + 1) + '" focusable="false">' +
+      '<rect x="1" y="1" width="398" height="298" rx="13" fill="var(--surface-2)" stroke="var(--line)" stroke-width="1"/>' +
+      '<g transform="translate(200 132) scale(3.4) translate(-12 -12)" fill="none" stroke="var(--accent)" ' +
+      'stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" opacity=".85">' + icon + "</g>" +
+      '<text x="200" y="238" text-anchor="middle" font-family="Cairo, sans-serif" font-size="17" font-weight="700" fill="var(--text)">' +
+      SITE_DATA.works.itemLabel + "</text>" +
+      '<text x="200" y="268" text-anchor="middle" direction="ltr" font-family="Cairo, sans-serif" font-size="12" fill="var(--muted)">' +
+      pad2(i + 1) + " / " + pad2(SITE_DATA.works.icons.length) + "</text>" +
+      "</svg>";
+  }
+
+  function renderWorks() {
+    var grid = $("#worksGrid");
+    if (!grid) return;
+    grid.innerHTML = SITE_DATA.works.icons.map(function (_, i) {
+      return '<button class="work" type="button" data-work="' + i + '" aria-label="' +
+        SITE_DATA.works.itemLabel + " " + (i + 1) + '">' + workArt(i) + "</button>";
+    }).join("");
+  }
+
+  var lb = {
+    el: null, stage: null, count: null, index: 0, lastFocus: null,
+    init: function () {
+      this.el = $("#lightbox");
+      this.stage = $("#lbStage");
+      this.count = $("#lbCount");
+      if (!this.el) return;
+      var self = this;
+      $("#lbClose").addEventListener("click", function () { self.close(); });
+      $("#lbPrev").addEventListener("click", function () { self.go(-1); });
+      $("#lbNext").addEventListener("click", function () { self.go(1); });
+      this.el.addEventListener("click", function (e) {
+        if (e.target === self.el || e.target.classList.contains("lb__stage")) self.close();
+      });
+      document.addEventListener("keydown", function (e) {
+        if (self.el.hidden) return;
+        if (e.key === "Escape") { e.preventDefault(); self.close(); }
+        else if (e.key === "ArrowLeft") { e.preventDefault(); self.go(1); }
+        else if (e.key === "ArrowRight") { e.preventDefault(); self.go(-1); }
+        else if (e.key === "Tab") self.trap(e);
+      });
+    },
+    open: function (i) {
+      if (!this.el) return;
+      this.lastFocus = document.activeElement;
+      this.index = i;
+      this.render();
+      this.el.hidden = false;
+      document.documentElement.style.overflow = "hidden";
+      $("#lbClose").focus();
+    },
+    close: function () {
+      if (!this.el || this.el.hidden) return;
+      this.el.hidden = true;
+      document.documentElement.style.overflow = "";
+      if (this.lastFocus && this.lastFocus.focus) this.lastFocus.focus();
+    },
+    go: function (step) {
+      var n = SITE_DATA.works.icons.length;
+      this.index = (this.index + step + n) % n;
+      this.render();
+    },
+    render: function () {
+      this.stage.innerHTML = workArt(this.index);
+      this.count.textContent = pad2(this.index + 1) + " / " + pad2(SITE_DATA.works.icons.length);
+    },
+    trap: function (e) {
+      var items = [$("#lbClose"), $("#lbPrev"), $("#lbNext")];
+      var first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  };
+
+  /* سحب أفقي بالأصابع/الفأرة */
+  function initDrag() {
+    var track = $("#worksGrid");
+    if (!track) return;
+    var down = false, startX = 0, startScroll = 0, moved = false;
+    var rtl = true;
+
+    track.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "touch") return; /* التمرير الأصلي على اللمس */
+      down = true;
+      moved = false;
+      startX = e.clientX;
+      startScroll = track.scrollLeft;
+      rtl = getComputedStyle(track).direction === "rtl";
+      track.classList.add("is-dragging");
+    });
+
+    track.addEventListener("pointermove", function (e) {
+      if (!down) return;
+      var dx = e.clientX - startX;
+      if (Math.abs(dx) > 4) moved = true;
+      track.scrollLeft = rtl ? startScroll + dx : startScroll - dx;
+    });
+
+    function end() {
+      down = false;
+      track.classList.remove("is-dragging");
+    }
+    track.addEventListener("pointerup", end);
+    track.addEventListener("pointercancel", end);
+    track.addEventListener("pointerleave", end);
+    track.addEventListener("click", function (e) {
+      if (moved) { e.preventDefault(); e.stopPropagation(); }
+    }, true);
+  }
+
+  /* ---------- مناطق الخدمة ---------- */
+  function renderAreas() {
+    var list = $("#areasList");
+    if (!list) return;
+    list.innerHTML = SITE_DATA.districts.map(function (d) {
+      return "<li>" + SITE_DATA.areas.prefix + " " + d + "</li>";
+    }).join("");
+  }
+
+  /* ---------- الطلب ---------- */
+  var order = { service: null, district: null, time: null };
+
+  function chip(label, value, group) {
+    return '<button class="chip" type="button" data-group="' + group + '" data-value="' +
+      value + '" aria-pressed="false">' + label + "</button>";
+  }
+
+  function renderOrderChips() {
+    var s = $("#serviceChips"), d = $("#districtChips"), t = $("#timeChips");
+    if (s) s.innerHTML = SITE_DATA.services.items.map(function (x) { return chip(x.title, x.title, "service"); }).join("");
+    if (d) {
+      d.innerHTML = SITE_DATA.districts.map(function (x) { return chip(x, x, "district"); }).join("") +
+        chip(SITE_DATA.order.otherDistrict, SITE_DATA.order.otherDistrict, "district");
+    }
+    if (t) t.innerHTML = SITE_DATA.times.map(function (x) { return chip(x, x, "time"); }).join("");
+  }
+
+  function buildMessage() {
+    var note = $("#noteInput");
+    var msg = SITE_DATA.order.msgTemplate
+      .replace("{service}", order.service)
+      .replace("{district}", order.district)
+      .replace("{time}", order.time);
+    if (note && note.value.trim()) {
+      msg += " " + SITE_DATA.order.notePrefix + " " + note.value.trim();
+    }
+    return msg;
+  }
+
+  function updateOrder() {
+    var summary = $("#orderSummary");
+    var btn = $("#sendBtn");
+    var ready = !!(order.service && order.district && order.time);
+
+    if (btn) btn.disabled = !ready;
+
+    if (summary) {
+      if (!ready) {
+        var missing = [];
+        if (!order.service) missing.push(SITE_DATA.order.step1);
+        if (!order.district) missing.push(SITE_DATA.order.step2);
+        if (!order.time) missing.push(SITE_DATA.order.step3);
+        summary.textContent = SITE_DATA.order.summaryEmpty;
+        summary.classList.remove("is-ready");
+      } else {
+        summary.textContent = SITE_DATA.order.summaryPrefix + " " +
+          [order.service, order.district, order.time].join(" · ");
+        summary.classList.add("is-ready");
+      }
+    }
+    if (btn) {
+      if (ready) btn.setAttribute("data-msg", buildMessage());
+      else btn.removeAttribute("data-msg");
+    }
+  }
+
+  function setChoice(group, value) {
+    order[group] = value;
+    $$('.chip[data-group="' + group + '"]').forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-value") === value ? "true" : "false");
+    });
+    updateOrder();
+  }
+
+  function initOrder() {
+    renderOrderChips();
+    updateOrder();
+
+    var summary = $("#orderSummary");
+    if (summary && !summary.textContent) summary.textContent = SITE_DATA.order.summaryEmpty;
+
+    document.addEventListener("click", function (e) {
+      var chipEl = e.target.closest(".chip");
+      if (chipEl) {
+        setChoice(chipEl.getAttribute("data-group"), chipEl.getAttribute("data-value"));
+        return;
+      }
+      var orderBtn = e.target.closest(".card__order");
+      if (orderBtn) {
+        var svc = SITE_DATA.services.items.filter(function (x) { return x.id === orderBtn.getAttribute("data-service"); })[0];
+        if (!svc) return;
+        setChoice("service", svc.title);
+        var panel = $("#contact");
+        if (panel) panel.scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "start" });
+        return;
+      }
+      var workBtn = e.target.closest(".work");
+      if (workBtn) lb.open(Number(workBtn.getAttribute("data-work")));
+    });
+
+    var send = $("#sendBtn");
+    if (send) {
+      send.addEventListener("click", function () {
+        var msg = send.getAttribute("data-msg");
+        if (!msg) return;
+        window.open("https://wa.me/" + SITE_DATA.contact.whatsapp + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+      });
+    }
+
+    var note = $("#noteInput");
+    if (note) note.addEventListener("input", updateOrder);
+  }
+
+  /* ---------- القائمة ---------- */
+  function initNav() {
+    var burger = $("#burger"), nav = $("#nav"), backdrop = $("#navBackdrop");
+    if (!burger || !nav) return;
+
+    function setOpen(open) {
+      document.documentElement.classList.toggle("nav-open", open);
+      burger.setAttribute("aria-expanded", open ? "true" : "false");
+      burger.setAttribute("aria-label", open ? SITE_DATA.ui.menuClose : SITE_DATA.ui.menuOpen);
+      document.documentElement.style.overflow = open ? "hidden" : "";
+      if (backdrop) {
+        if (open) { backdrop.hidden = false; }
+        else { backdrop.hidden = true; }
+      }
+    }
+
+    burger.addEventListener("click", function () {
+      setOpen(!document.documentElement.classList.contains("nav-open"));
+    });
+    if (backdrop) backdrop.addEventListener("click", function () { setOpen(false); });
+    $$("a", nav).forEach(function (a) { a.addEventListener("click", function () { setOpen(false); }); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && document.documentElement.classList.contains("nav-open")) {
+        setOpen(false);
+        burger.focus();
+      }
+    });
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 900 && document.documentElement.classList.contains("nav-open")) setOpen(false);
+    });
+
+    var header = $("#siteHeader");
+    if (header) {
+      var onScroll = function () { header.classList.toggle("is-stuck", window.scrollY > 8); };
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    }
+  }
+
+  /* ---------- التشغيل ---------- */
+  function init() {
+    applyMeta();
+    renderLogo();
+    applyText();
+    applyAttrs();
+    applyIcons();
+    applyLinks();
+    injectJsonLd();
+
+    renderServices();
+    renderFacts();
+    renderFeatures();
+    renderWorks();
+    renderAreas();
+    renderHours();
+    initOrder();
+    initNav();
+    initDrag();
+    lb.init();
+    renderStatus();
+
+    setInterval(function () { renderStatus(); renderHours(); }, 60000);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+
+</script>
+</body>
+</html>
